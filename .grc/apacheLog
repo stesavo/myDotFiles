@@ -1,0 +1,36 @@
+# brackets
+regexp=[\{\[\(\)\]\}]+
+colours=green
+count=more
+-
+#digits
+regexp=[\d]+
+colours=blue
+count=more
+-
+#strings
+regexp='.*?'
+colours=dark blue
+count=more
+-
+regexp=^.+\sat.*line.[\d]+\.
+colours= reverse
+count=more
+-
+#warn, die
+regexp=\sat\s.*line\s[\d]+\.
+colours=cyan on_white
+count=more
+-
+#actual warnings
+regexp=^\swarning.*$
+colours=white on_yellow
+count=more
+-
+regexp=UNKNOWN\sURL.*$
+colours=white on_yellow
+count=more
+-
+regexp=\ssyntax\serror.*$
+colours=black on_yellow blink
+count=more

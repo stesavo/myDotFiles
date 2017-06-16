@@ -1,0 +1,57 @@
+let mapleader=","
+noremap <C-]> g<C-]>
+set nolist
+"ban ex mode
+nmap Q <Nop>
+
+"##################################################
+" Leader Keys
+"##################################################
+nmap <leader>l :set list!<CR>
+nnoremap <leader>w :StripWhitespace<cr>
+
+"better whitespace, avoid accidental whitespace stripping
+unmap <leader>w
+nmap <leader>w :ToggleWhitespace<CR>
+
+"NERDTree
+map <leader>n :NERDTreeToggle<CR>
+map <leader>f :NERDTreeFind<CR>
+
+" display highlight group under cursor
+map <leader>s :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"CtrlP
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>t :CtrlPBufTag<CR>
+
+"NeoComplete
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+"##############################################################################
+" F Keys
+"##############################################################################
+
+let g:NumberToggleTrigger="<F2>"
+nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F4> :NeoCompleteToggle<cr>
+nnoremap <F5> :UndotreeToggle<cr>
+nmap <F8> :TagbarToggle<CR>
+" entfernt Search Highlight
+nnoremap <F12> : let @/ = "" <CR>
+
