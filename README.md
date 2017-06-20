@@ -1,2 +1,2 @@
 # myDotFiles
-collection of configs I use
+collection of configs I use plus some scripts I find handy
