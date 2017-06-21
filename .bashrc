@@ -105,7 +105,6 @@ shopt -s histverify
 shopt -s extglob
 
 export GREP_OPTIONS='--color=auto'
-source /home/stsa/bin/svnHacks.sh
 
 #enable vi-mode
 set -o vi
