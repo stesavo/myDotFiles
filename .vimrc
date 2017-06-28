@@ -42,8 +42,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
 call plug#end()
 
 " #############################################################################
