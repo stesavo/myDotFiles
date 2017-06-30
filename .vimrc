@@ -28,7 +28,6 @@ Plug 'juneedahamed/vc.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
@@ -170,8 +169,6 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:10,max:30,results:30'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['lib']
 "
-" Session Manager
-:let g:session_autoload = 'no'
 
 "NERDCommenter
 let NERDSpaceDelims=1
@@ -235,10 +232,6 @@ endif
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
 inoremap <expr><silent> <CR> <SID>my_cr_function()
 "allow completion at end of line
 function! s:my_cr_function()
@@ -297,7 +290,7 @@ set tags=./tags;/
 
 
 " signify
-let g:signify_vcs_list = [ 'git', 'svn' ]
+let g:signify_vcs_list = ['svn', 'git']
 
 " EnhancedDiff
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
