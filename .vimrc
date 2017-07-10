@@ -84,6 +84,7 @@ if has("autocmd")
   autocmd FileType cfg call SetCfgOptions()
   autocmd FileType sh,bash,zsh call SetShellOptions()
   autocmd FileType json call SetJSONOptions()
+  autocmd FileType javascript call SetJSONOptions()
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
   autocmd FileType html,php,xhtml,css setlocal ts=4 sts=4 sw=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
@@ -97,6 +98,7 @@ function! SetShellOptions()
   setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
 endfunction
 function! SetJSONOptions()
+  setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
 endfunction
 function! SetCfgOptions()
     setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
@@ -223,6 +225,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
