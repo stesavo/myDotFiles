@@ -18,7 +18,6 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'coot/vim_args'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dahu/vim-lotr'
-Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'guns/xterm-color-table.vim'
 Plug 'honza/vim-snippets'
@@ -28,6 +27,7 @@ Plug 'juneedahamed/vc.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
@@ -373,6 +373,9 @@ let g:vc_browse_cache_all=1
 "tagbar
 let g:tagbar_sort=0
 let g:tagbar_zoomwidth=0
+
+"sneak
+let g:sneak#label = 1
 
 " #############################################################################
 " extended colorscheme
