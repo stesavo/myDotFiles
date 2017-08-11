@@ -107,7 +107,7 @@ endfunction
 colorscheme PaperColor
 set backspace=indent,eol,start
 set backup
-set bg=light
+set bg=dark
 set cursorline
 set diffopt=vertical,filler
 set encoding=utf-8
@@ -120,6 +120,8 @@ set helplang=en
 set hidden
 set history=50
 set hlsearch
+set ignorecase
+set smartcase
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
@@ -304,7 +306,7 @@ endif
 
 "lightline
 let g:lightline = {
-			\ 'colorscheme': 'PaperColor',
+			\ 'colorscheme': 'jellybeans',
 			\ 'component': {
 			\ },
 			\ 'separator': { 'left': '', 'right': '' },
@@ -376,6 +378,8 @@ let g:tagbar_zoomwidth=0
 
 "sneak
 let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
+
 
 " #############################################################################
 " extended colorscheme
@@ -389,10 +393,6 @@ hi ttIdentifier ctermfg=lightgray
 highlight link CtrlPMatch Search
 " tagbar
 hi TagbarHighlight ctermbg=darkgreen ctermfg=black
-" EasyMotion
-highlight link EasyMotionTarget Search
-highlight link EasyMotionTarget2First Search
-highlight link EasyMotionTarget2Second Search
 
 " #############################################################################
 " extended rc file
