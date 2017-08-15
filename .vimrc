@@ -10,6 +10,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'SirVer/ultisnips'
 Plug 'artnez/vim-wipeout'
@@ -38,6 +39,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/spotdiff.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -63,9 +65,9 @@ set modeline
 set modelines=100
 
 if &term =~ '256color'
-	" disable Background Color Erase in 256 color tmux
-	" so that colorschemes render correctly
-	set t_ut=
+" disable Background Color Erase in 256 color tmux
+" so that colorschemes render correctly
+set t_ut=
 endif
 setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
 
@@ -104,7 +106,7 @@ function! SetCfgOptions()
     setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
 endfunction
 
-colorscheme PaperColor
+colorscheme onehalfdark
 set backspace=indent,eol,start
 set backup
 set bg=dark
@@ -212,12 +214,13 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplete#auto_complete_delay = 300
-let	g:neocomplete#skip_auto_completion_time = 0.1
+let g:neocomplete#skip_auto_completion_time = 0.1
+
 let g:neocomplete#sources#dictionary#dictionaries = {
    \ 'default' : '',
    \ 'vimshell' : $HOME.'/.vimshell_hist',
    \ 'scheme' : $HOME.'/.gosh_completions'
-       \ }
+   \ }
 if !exists('g:neocomplete#keyword_patterns')
    let g:neocomplete#keyword_patterns = {}
 endif
@@ -230,9 +233,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
- let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+ " let g:neocomplete#sources#omni#input_patterns = {}
+" endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
@@ -242,6 +245,7 @@ inoremap <expr><silent> <CR> <SID>my_cr_function()
 function! s:my_cr_function()
   return pumvisible() ? neocomplete#close_popup() . "\<CR>" : "\<CR>"
 endfunction
+
 "Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -301,53 +305,53 @@ let g:signify_vcs_list = ['svn', 'git']
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
-	windo set syn=OFF
+    windo set syn=OFF
 endif
 
 "lightline
 let g:lightline = {
-			\ 'colorscheme': 'jellybeans',
-			\ 'component': {
-			\ },
-			\ 'separator': { 'left': '', 'right': '' },
-			\ 'subseparator': { 'left': '', 'right': '' }
-			\ }
+            \ 'colorscheme': 'onehalfdark',
+            \ 'component': {
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
+            \ }
 let g:lightline.component = {
-	\ 'mode': '%{lightline#mode()}',
-	\ 'absolutepath': '%F',
-	\ 'relativepath': '%f',
-	\ 'filename': '%t',
-	\ 'modified': '%{&modified?"⛁ ❗":"⛁ ✔"}',
-	\ 'bufnum': '%n',
-	\ 'paste': '%{&paste?"PASTE":""}',
-	\ 'readonly': '%{&readonly?"":""}',
-	\ 'charvalue': '%b',
-	\ 'charvaluehex': '%B',
-	\ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-	\ 'fileformat': '%{&ff}',
-	\ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-	\ 'percent': '%3p%%',
-	\ 'percentwin': '%P',
-	\ 'spell': '%{&spell?&spelllang:""}',
-	\ 'lineinfo': '%3l:%-2v',
-	\ 'line': '%l',
-	\ 'column': '%c',
-	\ 'path' : '%{expand("%:h")}/',
-	\ 'close': '%999X X ' }
+    \ 'mode': '%{lightline#mode()}',
+    \ 'absolutepath': '%F',
+    \ 'relativepath': '%f',
+    \ 'filename': '%t',
+    \ 'modified': '%{&modified?"⛁ ❗":"⛁ ✔"}',
+    \ 'bufnum': '%n',
+    \ 'paste': '%{&paste?"PASTE":""}',
+    \ 'readonly': '%{&readonly?"":""}',
+    \ 'charvalue': '%b',
+    \ 'charvaluehex': '%B',
+    \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+    \ 'fileformat': '%{&ff}',
+    \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
+    \ 'percent': '%3p%%',
+    \ 'percentwin': '%P',
+    \ 'spell': '%{&spell?&spelllang:""}',
+    \ 'lineinfo': '%3l:%-2v',
+    \ 'line': '%l',
+    \ 'column': '%c',
+    \ 'path' : '%{expand("%:h")}/',
+    \ 'close': '%999X X ' }
 let g:lightline.active = {
-	\ 'left': [ [ 'mode', 'paste' ],
-	\           [ 'path'],
-	\			[ 'filename' ] ],
-	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent' ],
-	\            [ 'modified', 'readonly', 'fileformat', 'fileencoding', 'filetype' ] ] }
+    \ 'left': [ [ 'mode', 'paste' ],
+    \           [ 'path'],
+    \            [ 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ],
+    \            [ 'modified', 'readonly', 'fileformat', 'fileencoding', 'filetype' ] ] }
 let g:lightline.inactive = {
-	\ 'left': [ [ 'readonly', 'filename' ] ],
-	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent' ] ] }
+    \ 'left': [ [ 'readonly', 'filename' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
 let g:lightline.tabline = {
-	\ 'left': [ [ 'tabs' ] ],
-	\ 'right': [ [ 'close' ] ] }
+    \ 'left': [ [ 'tabs' ] ],
+    \ 'right': [ [ 'close' ] ] }
 
 " LOTR
 let lotr_position = 'top'
@@ -393,6 +397,8 @@ hi ttIdentifier ctermfg=lightgray
 highlight link CtrlPMatch Search
 " tagbar
 hi TagbarHighlight ctermbg=darkgreen ctermfg=black
+highlight PMenuSel none
+highlight link PMenuSel Visual
 
 " #############################################################################
 " extended rc file
