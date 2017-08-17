@@ -52,8 +52,8 @@ if has('persistent_undo')
 if !isdirectory($HOME."/.vim_undo_history")
   call mkdir($HOME."/.vim_undo_history", "", 0700)
 endif
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
+set undolevels=100          " How many undos
+set undoreload=1000         " number of lines to save for undo
 set undodir=~/.vim_undo_history
 set undofile
 endif
@@ -397,8 +397,10 @@ hi ttIdentifier ctermfg=lightgray
 highlight link CtrlPMatch Search
 " tagbar
 hi TagbarHighlight ctermbg=darkgreen ctermfg=black
+"onehalf tweaks
 highlight PMenuSel none
 highlight link PMenuSel Visual
+hi! link IncSearch Visual
 
 " #############################################################################
 " extended rc file

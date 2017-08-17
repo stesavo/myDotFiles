@@ -21,6 +21,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'coot/vim_args'
 Plug 'dahu/vim-lotr'
+Plug 'ervandew/supertab'
 Plug 'guns/xterm-color-table.vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
@@ -30,7 +31,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
-Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
@@ -154,6 +154,7 @@ syntax enable
 " #############################################################################
 " PLUGIN SPECIFIC SETTINGS
 " #############################################################################
+
 "NERDTree
 let g:NERDTreeWinSize = 60
 
@@ -229,10 +230,8 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'up': '~40%' }
 " In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
