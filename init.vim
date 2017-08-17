@@ -39,10 +39,12 @@ Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/spotdiff.vim'
+Plug 'roxma/vim-tmux-clipboard'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tmhedberg/matchit'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -230,7 +232,7 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - down / up / left / right
-let g:fzf_layout = { 'up': '~40%' }
+let g:fzf_layout = { 'down': '~40%' }
 " In Neovim, you can set up fzf window using a Vim command
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
