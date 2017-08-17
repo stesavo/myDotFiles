@@ -47,6 +47,7 @@ Plug 'tmhedberg/matchit'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 call plug#end()
 
 " #############################################################################
@@ -342,6 +343,12 @@ let g:tagbar_zoomwidth=0
 "sneak
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
+
+"ale
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_delay = 400
 
 
 " #############################################################################
