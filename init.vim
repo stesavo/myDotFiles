@@ -135,6 +135,7 @@ set history=50
 set hlsearch
 set ignorecase
 set smartcase
+set inccommand=split
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
