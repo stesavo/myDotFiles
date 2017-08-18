@@ -1,3 +1,5 @@
+set encoding=utf-8
+scriptencoding utf-8
 " #############################################################################
 " PLUGINS
 " #############################################################################
@@ -9,7 +11,10 @@ let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
       silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
           \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall | source $MYVIMRC
+		augroup vimrc_plug_init
+		  autocmd!
+			autocmd VimEnter * PlugInstall | source $MYVIMRC
+		augroup END
 endif
 
 call plug#begin($HOME.'/.config/nvim/bundle')
@@ -54,27 +59,26 @@ call plug#end()
 " GENERAL SETUP
 " #############################################################################
 if has('persistent_undo')
-if !isdirectory($HOME."/.vim_undo_history")
-  call mkdir($HOME."/.vim_undo_history", "", 0700)
+if !isdirectory($HOME.'/.vim_undo_history')
+  call mkdir($HOME.'/.vim_undo_history', '', 0700)
 endif
 set undolevels=100          " How many undos
 set undoreload=1000         " number of lines to save for undo
 set undodir=~/.vim_undo_history
 set undofile
 endif
-let g:sessionDir = $HOME . "/.vim_sessions"
-set nocp
+let g:sessionDir = $HOME . '/.vim_sessions'
 syntax on
 filetype plugin indent on
 set modeline
 set modelines=100
 
-if &term =~ '256color'
+if &term =~? '256color'
 " disable Background Color Erase in 256 color tmux
 " so that colorschemes render correctly
 set t_ut=
 endif
-setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
+setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 
 set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>
 
@@ -86,38 +90,40 @@ highlight ExtraWhitespace ctermbg=red ctermfg=yellow guibg=red
 match ExtraWhitespace /\s\+$/
 
 
-if has("autocmd")
-  autocmd FileType perl,pl,pm,tmpl call SetPerlOptions()
-  autocmd FileType cfg call SetCfgOptions()
-  autocmd FileType sh,bash,zsh call SetShellOptions()
-  autocmd FileType json call SetJSONOptions()
-  autocmd FileType javascript call SetJSONOptions()
-  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-  autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-  autocmd FileType html,php,xhtml,css setlocal ts=4 sts=4 sw=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
-  autocmd BufNewFile,BufRead *.rss setfiletype xml
+if has('autocmd')
+  augroup vimrc_filetype_config
+	  autocmd!
+	  autocmd FileType perl,pl,pm,tmpl call SetPerlOptions()
+	  autocmd FileType cfg call SetCfgOptions()
+	  autocmd FileType sh,bash,zsh call SetShellOptions()
+	  autocmd FileType json call SetJSONOptions()
+	  autocmd FileType javascript call SetJSONOptions()
+	  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+	  autocmd FileType make setlocal ts=8 softtabstop=8 shiftwidth=8 noexpandtab
+	  autocmd FileType html,php,xhtml,css setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
+	  autocmd BufNewFile,BufRead *.rss setfiletype xml
+  augroup END
 endif
 
 function! SetPerlOptions()
-    setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
+    setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
 function! SetShellOptions()
-  setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
+  setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
 function! SetJSONOptions()
-  setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
+  setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
 function! SetCfgOptions()
-    setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
+    setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
 
 colorscheme onehalfdark
 set backspace=indent,eol,start
 set backup
-set bg=dark
+set background=dark
 set cursorline
 set diffopt=vertical,filler
-set encoding=utf-8
 set foldcolumn=2
 set foldlevel=20
 set foldlevelstart=20
@@ -144,14 +150,14 @@ set selectmode=key
 set shiftwidth=4
 set showcmd
 set showtabline=1
-set so=10
+set scrolloff=10
 set spelllang=en,de_20
 set tabstop=4
 set textwidth=240
 set virtualedit=block
 set whichwrap=b,s,<,>,[,]
 set wildmenu
-set wildmode=list:longest
+set wildmode=full
 syntax enable
 
 " #############################################################################
@@ -167,7 +173,7 @@ if executable('ag')
   endif
 let g:ackhighlight = 1
 let g:ack_autofold_results = 0
-let g:ack_qhandler = "botright copen 10"
+let g:ack_qhandler = 'botright copen 10'
 let g:ack_apply_qmappings=1
 
 " SuperTab
@@ -175,7 +181,7 @@ let g:SuperTabMappingForward = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 
 "NERDCommenter
-let NERDSpaceDelims=1
+let g:NERDSpaceDelims=1
 set nopaste
 
 "deoplete
@@ -202,10 +208,10 @@ endif
 " Highlight linked syntax type.
 " You may chose your favorite through ":hi" command
 if !exists('g:undotree_HighlightSyntaxAdd')
-    let g:undotree_HighlightSyntaxAdd = "DiffAdd"
+    let g:undotree_HighlightSyntaxAdd = 'DiffAdd'
 endif
 if !exists('g:undotree_HighlightSyntaxChange')
-    let g:undotree_HighlightSyntaxChange = "DiffChange"
+    let g:undotree_HighlightSyntaxChange = 'DiffChange'
 endif
 
 "Silver Searcher
@@ -221,8 +227,8 @@ if executable('ag')
 endif
 
 " UltiSnips
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom-snippets"]
-let UltiSnipsExpandTrigger = '<f9>'
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom-snippets']
+let g:UltiSnipsExpandTrigger = '<f9>'
 
 "fzf
 " This is the default extra key bindings
@@ -314,8 +320,8 @@ let g:lightline.tabline = {
     \ 'right': [ [ 'close' ] ] }
 
 " LOTR
-let lotr_position = 'top'
-let lotr_winsize  = 17
+let g:lotr_position = 'top'
+let g:lotr_winsize  = 17
 
 " On many terminals, <Esc>O (with an uppercase O) is a prefix for several
 " keycodes, as a consequence insert above can be slow after having pressed <ESC>
@@ -323,7 +329,10 @@ let lotr_winsize  = 17
 set timeout timeoutlen=600 ttimeoutlen=100
 
 "disable automatic continuation of comments
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup vimrc
+  autocmd!
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
 
 "Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
@@ -367,12 +376,12 @@ hi TagbarHighlight ctermbg=darkgreen ctermfg=black
 "onehalf tweaks
 highlight PMenuSel none
 highlight link PMenuSel Visual
-hi! link IncSearch Visual
+hi! link IncSearch PMenu
 
 " #############################################################################
 " extended rc file
 " #############################################################################
-if filereadable($HOME."/.config/nvim/init.vim.keymappings")
+if filereadable($HOME.'/.config/nvim/init.vim.keymappings')
   so $HOME/.config/nvim/init.vim.keymappings
 endif
 
