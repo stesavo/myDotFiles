@@ -161,6 +161,8 @@ set wildmenu
 set wildmode=full
 syntax enable
 
+cab Help vert bo help
+
 " #############################################################################
 " PLUGIN SPECIFIC SETTINGS
 " #############################################################################
@@ -267,6 +269,7 @@ set tags=./tags;/
 
 " signify
 let g:signify_vcs_list = ['svn', 'git']
+let g:signify_realtime = 1
 
 " EnhancedDiff
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
