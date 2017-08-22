@@ -373,6 +373,7 @@ function! Multiple_cursors_before()
 endfunction
 
 "VC
+set shell=/bin/bash " zsh does not work
 let g:vc_auth_errno=215004
 let g:vc_browse_cache_all=1
 

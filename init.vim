@@ -221,12 +221,6 @@ endif
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files.
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 1
 endif
 
 " UltiSnips
@@ -346,6 +340,7 @@ function! Multiple_cursors_before()
 endfunction
 
 "VC
+set shell=/bin/bash
 let g:vc_auth_errno=215004
 let g:vc_browse_cache_all=1
 
