@@ -36,6 +36,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
+Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
@@ -122,6 +123,7 @@ colorscheme onehalfdark
 set backspace=indent,eol,start
 set backup
 set background=dark
+set colorcolumn=125
 set cursorline
 set diffopt=vertical,filler
 set foldcolumn=2
