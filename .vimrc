@@ -149,6 +149,10 @@ set wildmenu
 set wildmode=list:longest
 syntax enable
 
+if &diff
+	syntax off
+endif
+
 " #############################################################################
 " PLUGIN SPECIFIC SETTINGS
 " #############################################################################
