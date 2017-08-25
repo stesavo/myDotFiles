@@ -10,9 +10,6 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/neocomplete.vim'
-Plug 'SirVer/ultisnips'
 Plug 'artnez/vim-wipeout'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/vim-diff-enhanced'
@@ -211,45 +208,6 @@ if !exists('g:undotree_HighlightSyntaxChange')
     let g:undotree_HighlightSyntaxChange = "DiffChange"
 endif
 
-"neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#auto_complete_delay = 300
-let g:neocomplete#skip_auto_completion_time = 0.1
-
-let g:neocomplete#sources#dictionary#dictionaries = {
-   \ 'default' : '',
-   \ 'vimshell' : $HOME.'/.vimshell_hist',
-   \ 'scheme' : $HOME.'/.gosh_completions'
-   \ }
-if !exists('g:neocomplete#keyword_patterns')
-   let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-
-" Enable heavy omni completion.
-" if !exists('g:neocomplete#sources#omni#input_patterns')
- " let g:neocomplete#sources#omni#input_patterns = {}
-" endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-inoremap <expr><silent> <CR> <SID>my_cr_function()
-"allow completion at end of line
-function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() . "\<CR>" : "\<CR>"
-endfunction
-
 "Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -261,10 +219,6 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-"UltiSnips
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "custom-snippets"]
-let UltiSnipsExpandTrigger = '<f9>'
 
 "fzf
 " This is the default extra key bindings
