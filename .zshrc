@@ -147,6 +147,13 @@ POWERLEVEL9K_SVN="prompt_svn"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context virtualenv dir dir_writable root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time)
 
+#dir colors setup
+[ -f ~/.dircolors ] && eval `dircolors -b ~/.dircolors`
+alias ls='ls --color=auto'
+
+#colored man pages
+[ -f ~/bin/termcolorsetup.zsh ] && source ~/bin/termcolorsetup.zsh
+
 #put the personal part of your config in ...
 [ -f ~/.personalConfig.zsh ] && source ~/.personalConfig.zsh
 
