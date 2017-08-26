@@ -323,13 +323,6 @@ set timeout timeoutlen=600 ttimeoutlen=100
 "disable automatic continuation of comments
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
 "VC
 set shell=/bin/bash " zsh does not work
 let g:vc_auth_errno=215004
