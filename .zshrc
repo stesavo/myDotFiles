@@ -150,6 +150,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time)
 #dir colors setup
 [ -f ~/.dircolors ] && eval `dircolors -b ~/.dircolors`
 alias ls='ls --color=auto'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 #colored man pages
 [ -f ~/bin/termcolorsetup.zsh ] && source ~/bin/termcolorsetup.zsh
