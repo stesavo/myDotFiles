@@ -16,6 +16,7 @@
 #                                                                                                    #
 ######################################################################################################
 
+export TERM=screen-256color
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -129,7 +130,6 @@ bindkey -e
 unsetopt listambiguous
 
 export GREP_OPTIONS='--color=auto'
-export TERM=screen-256color
 export LC_COLLATE=C
 
 #disable flow control
