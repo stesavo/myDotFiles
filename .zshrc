@@ -2,8 +2,9 @@
 # stesavos oh-my-zsh config                                                                          #
 #                                                                                                    #
 # DEPENDENCIES                                                                                       #
-#  oh-my-zsh                                                                                         #
-#  powerlevel9k                                                                                      #
+#  oh-my-zsh https://github.com/robbyrussell/oh-my-zsh/                                              #
+#  fast-syntax-highlighting: https://github.com/zdharma/fast-syntax-highlighting/                    #
+#  powerlevel9k https://github.com/bhilburn/powerlevel9k/                                            #
 #  font patched for powerline (I use Hack)                                                           #
 #                                                                                                    #
 # I had to do some editing to make things work the way I wanted. Look out for FIXME in this file     #
@@ -71,7 +72,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn common-aliases cpanm dirhistory pip) 
+plugins=(git svn common-aliases cpanm dirhistory pip vi-mode fast-syntax-highlighting) 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -124,10 +125,11 @@ prompt_svn() {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#use emacs key bindings (default)
-bindkey -e
+#use emacs (-e) or vi (-v) key bindings
+bindkey -v
 # always show alternatives after TAB auto-completion
 unsetopt listambiguous
+setopt extended_glob
 
 export GREP_OPTIONS='--color=auto'
 export LC_COLLATE=C
@@ -138,14 +140,15 @@ stty start '';
 
 # powerlevel9k setup
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="▷ "
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=6
 POWERLEVEL9K_SVN="prompt_svn"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context virtualenv dir dir_writable root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode ssh context virtualenv dir dir_writable root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time) 
 
 #dir colors setup
 [ -f ~/.dircolors ] && eval `dircolors -b ~/.dircolors`
