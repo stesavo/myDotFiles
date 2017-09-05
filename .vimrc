@@ -103,6 +103,8 @@ function! SetCfgOptions()
     setlocal ts=4 sts=4 sw=4 expandtab cindent autoindent smartindent
 endfunction
 
+autocmd Colorscheme * highlight Whitespace ctermfg=239
+autocmd Colorscheme * highlight NonText ctermfg=239
 colorscheme onehalfdark
 set backspace=indent,eol,start
 set backup
@@ -124,6 +126,7 @@ set smartcase
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
+set list
 set nocursorcolumn
 set nospell
 set number

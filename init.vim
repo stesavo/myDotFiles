@@ -11,10 +11,10 @@ let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
       silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
           \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		augroup vimrc_plug_init
-		  autocmd!
-			autocmd VimEnter * PlugInstall | source $MYVIMRC
-		augroup END
+        augroup vimrc_plug_init
+          autocmd!
+            autocmd VimEnter * PlugInstall | source $MYVIMRC
+        augroup END
 endif
 
 call plug#begin($HOME.'/.config/nvim/bundle')
@@ -30,6 +30,7 @@ Plug 'ervandew/supertab'
 Plug 'guns/xterm-color-table.vim'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
+Plug 'janko-m/vim.test'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'juneedahamed/vc.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
@@ -79,9 +80,9 @@ if &term =~? '256color'
 " so that colorschemes render correctly
 set t_ut=
 endif
-setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 
-set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>
+set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
 
 "EndOfLine Color
 highlight NonText ctermfg=darkgrey guifg=#4a4a59
@@ -93,16 +94,16 @@ match ExtraWhitespace /\s\+$/
 
 if has('autocmd')
   augroup vimrc_filetype_config
-	  autocmd!
-	  autocmd FileType perl,pl,pm,tmpl call SetPerlOptions()
-	  autocmd FileType cfg call SetCfgOptions()
-	  autocmd FileType sh,bash,zsh call SetShellOptions()
-	  autocmd FileType json call SetJSONOptions()
-	  autocmd FileType javascript call SetJSONOptions()
-	  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-	  autocmd FileType make setlocal ts=8 softtabstop=8 shiftwidth=8 noexpandtab
-	  autocmd FileType html,php,xhtml,css setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
-	  autocmd BufNewFile,BufRead *.rss setfiletype xml
+      autocmd!
+      autocmd FileType perl,pl,pm,tmpl call SetPerlOptions()
+      autocmd FileType cfg call SetCfgOptions()
+      autocmd FileType sh,bash,zsh call SetShellOptions()
+      autocmd FileType json call SetJSONOptions()
+      autocmd FileType javascript call SetJSONOptions()
+      autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+      autocmd FileType make setlocal ts=8 softtabstop=8 shiftwidth=8 expandtab
+      autocmd FileType html,php,xhtml,css setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
+      autocmd BufNewFile,BufRead *.rss setfiletype xml
   augroup END
 endif
 
@@ -118,7 +119,8 @@ endfunction
 function! SetCfgOptions()
     setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
-
+autocmd Colorscheme * highlight Whitespace ctermfg=239
+autocmd Colorscheme * highlight NonText ctermfg=239
 colorscheme onehalfdark
 set backspace=indent,eol,start
 set backup
@@ -141,6 +143,7 @@ set inccommand=split
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
+set list
 set nocursorcolumn
 set nospell
 set number
@@ -172,6 +175,9 @@ endif
 " #############################################################################
 " PLUGIN SPECIFIC SETTINGS
 " #############################################################################
+
+"test-vim
+let g:test#strategy = 'neovim'
 
 "NERDTree
 let g:NERDTreeWinSize = 60
@@ -335,7 +341,7 @@ set timeout timeoutlen=600 ttimeoutlen=100
 "disable automatic continuation of comments
 augroup vimrc
   autocmd!
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 augroup END
 
 "Called once right before you start selecting multiple cursors

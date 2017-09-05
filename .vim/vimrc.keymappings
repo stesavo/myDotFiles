@@ -1,6 +1,5 @@
 let mapleader=","
 noremap <C-]> g<C-]>
-set nolist
 "ban ex mode
 nmap Q <Nop>
 

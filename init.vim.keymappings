@@ -1,6 +1,5 @@
 let mapleader=","
 noremap <C-]> g<C-]>
-set nolist
 "ban ex mode
 nmap Q <Nop>
 
@@ -19,7 +18,7 @@ map <leader>n :NERDTreeToggle<CR>
 map <leader>f :NERDTreeFind<CR>
 
 " display highlight group under cursor
-map <leader>s :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
