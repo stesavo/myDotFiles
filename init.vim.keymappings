@@ -40,6 +40,7 @@ let g:NumberToggleTrigger="<F2>"
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :NeoCompleteToggle<cr>
 nnoremap <F5> :UndotreeToggle<cr>
+nnoremap <F9> :TestSuite<cr>
 nmap <F8> :TagbarToggle<CR>
 " entfernt Search Highlight
 nnoremap <F12> : let @/ = "" <CR>
