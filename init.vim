@@ -1,3 +1,11 @@
+"enable italics
+let &t_ZH = "\e[3m"
+let &t_ZR = "\e[23m"
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if has('termguicolors')
+    set termguicolors
+endif
 set encoding=utf-8
 scriptencoding utf-8
 " #############################################################################
@@ -24,6 +32,7 @@ Plug 'SirVer/ultisnips'
 Plug 'artnez/vim-wipeout'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'chriskempson/base16-vim'
 Plug 'coot/vim_args'
 Plug 'dahu/vim-lotr'
 Plug 'ervandew/supertab'
@@ -38,6 +47,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
+Plug 'lifepillar/vim-solarized8'
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
@@ -45,6 +55,7 @@ Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'morhetz/gruvbox'
+Plug 'nanotech/jellybeans.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/spotdiff.vim'
 Plug 'roxma/vim-tmux-clipboard'
@@ -57,6 +68,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
+Plug 'zeis/vim-kolor'
 call plug#end()
 
 " #############################################################################
@@ -90,9 +102,6 @@ set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
 highlight NonText ctermfg=darkgrey guifg=#4a4a59
 "Tab Color
 highlight SpecialKey ctermfg=darkgrey
-highlight ExtraWhitespace ctermbg=red ctermfg=yellow guibg=red
-match ExtraWhitespace /\s\+$/
-
 
 if has('autocmd')
   augroup vimrc_filetype_config
@@ -121,12 +130,12 @@ endfunction
 function! SetCfgOptions()
     setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 endfunction
-autocmd Colorscheme * highlight Whitespace ctermfg=239
-autocmd Colorscheme * highlight NonText ctermfg=239
-colorscheme onehalfdark
+autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
+autocmd Colorscheme * highlight NonText ctermfg=239 guifg=#555588
+autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
 set backspace=indent,eol,start
 set backup
-set background=dark
+set cmdwinheight=25
 set colorcolumn=125
 set cursorline
 set diffopt=vertical,filler
@@ -299,7 +308,7 @@ let g:lightline.component = {
     \ 'absolutepath': '%F',
     \ 'relativepath': '%f',
     \ 'filename': '%t',
-    \ 'modified': '%{&modified?"⛁ ❗":"⛁ ✔"}',
+    \ 'modified': '%{&modified?"!":" "}',
     \ 'bufnum': '%n',
     \ 'paste': '%{&paste?"PASTE":""}',
     \ 'readonly': '%{&readonly?"":""}',
@@ -340,6 +349,9 @@ let g:lotr_winsize  = 17
 " adjusting timeouts remedies this
 set timeout timeoutlen=600 ttimeoutlen=100
 
+" highlightedyank
+let g:highlightedyank_highlight_duration=500
+
 "disable automatic continuation of comments
 augroup vimrc
   autocmd!
@@ -374,7 +386,17 @@ let g:ale_lint_delay = 400
 let g:ale_sign_column_always = 1
 let g:ale_echo_msg_format='%linter%: %s (%severity%)'
 
+"signature
+let g:SignatureMarkTextHL='None'
 
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_invert_selection=0
+" colorscheme gruvbox
+colorscheme onehalfdark
+" set background=dark
+" colorscheme solarized8_dark
+" colorscheme base16-onedark
 " #############################################################################
 " extended colorscheme
 " #############################################################################
@@ -387,11 +409,10 @@ hi ttIdentifier ctermfg=lightgray
 highlight link CtrlPMatch Search
 " tagbar
 hi TagbarHighlight ctermbg=darkgreen ctermfg=black
-"onehalf tweaks
+" onehalf tweaks
 highlight PMenuSel none
 highlight link PMenuSel Visual
 hi! link IncSearch PMenu
-
 " #############################################################################
 " extended rc file
 " #############################################################################

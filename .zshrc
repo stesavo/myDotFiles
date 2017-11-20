@@ -17,8 +17,6 @@
 #                                                                                                    #
 ######################################################################################################
 
-export TERM=screen-256color
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -53,7 +51,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# This may break completion with multi-line prompts, though
+# COMPLETION_WAITING_DOTS="true"S
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -126,12 +125,11 @@ prompt_svn() {
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #use emacs (-e) or vi (-v) key bindings
-bindkey -v
+bindkey -e
 # always show alternatives after TAB auto-completion
 unsetopt listambiguous
 setopt extended_glob
 
-export GREP_OPTIONS='--color=auto'
 export LC_COLLATE=C
 
 #disable flow control
@@ -147,7 +145,7 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=6
 POWERLEVEL9K_SVN="prompt_svn"
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode ssh context virtualenv dir dir_writable root_indicator)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context virtualenv dir dir_writable root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time) 
 
 #dir colors setup
@@ -161,3 +159,5 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #put the personal part of your config in ...
 [ -f ~/.personalConfig.zsh ] && source ~/.personalConfig.zsh
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
