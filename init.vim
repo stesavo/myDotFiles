@@ -392,11 +392,7 @@ let g:SignatureMarkTextHL='None'
 let g:gruvbox_contrast_light='hard'
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
-" colorscheme gruvbox
-colorscheme onehalfdark
-" set background=dark
-" colorscheme solarized8_dark
-" colorscheme base16-onedark
+colorscheme protanone
 " #############################################################################
 " extended colorscheme
 " #############################################################################
