@@ -67,8 +67,9 @@ Plug 'tmhedberg/matchit'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'stesavo/dbext.vim'
 Plug 'w0rp/ale'
-Plug 'zeis/vim-kolor'
+" Plug 'zeis/vim-kolor'
 call plug#end()
 
 " #############################################################################
@@ -103,33 +104,6 @@ highlight NonText ctermfg=darkgrey guifg=#4a4a59
 "Tab Color
 highlight SpecialKey ctermfg=darkgrey
 
-if has('autocmd')
-  augroup vimrc_filetype_config
-      autocmd!
-      autocmd FileType perl,pl,pm,tmpl call SetPerlOptions()
-      autocmd FileType cfg call SetCfgOptions()
-      autocmd FileType sh,bash,zsh call SetShellOptions()
-      autocmd FileType json call SetJSONOptions()
-      autocmd FileType javascript call SetJSONOptions()
-      autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-      autocmd FileType make setlocal ts=8 softtabstop=8 shiftwidth=8 expandtab
-      autocmd FileType html,php,xhtml,css setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab equalprg=tidy\ --show-warnings\ false\ --show-body-only\ true\ -i\ -quiet
-      autocmd BufNewFile,BufRead *.rss setfiletype xml
-  augroup END
-endif
-
-function! SetPerlOptions()
-    setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
-endfunction
-function! SetShellOptions()
-  setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
-endfunction
-function! SetJSONOptions()
-  setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
-endfunction
-function! SetCfgOptions()
-    setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
-endfunction
 autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
 autocmd Colorscheme * highlight NonText ctermfg=239 guifg=#555588
 autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
@@ -171,6 +145,7 @@ set scrolloff=10
 set spelllang=en,de_20
 set tabstop=4
 set textwidth=240
+set updatetime=500
 set virtualedit=block
 set whichwrap=b,s,<,>,[,]
 set wildmenu
@@ -248,7 +223,6 @@ endif
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'custom-snippets']
-let g:UltiSnipsExpandTrigger = '<f9>'
 
 "fzf
 " This is the default extra key bindings
@@ -347,7 +321,7 @@ let g:lotr_winsize  = 17
 " On many terminals, <Esc>O (with an uppercase O) is a prefix for several
 " keycodes, as a consequence insert above can be slow after having pressed <ESC>
 " adjusting timeouts remedies this
-set timeout timeoutlen=600 ttimeoutlen=100
+set timeout timeoutlen=600 ttimeoutlen=0
 
 " highlightedyank
 let g:highlightedyank_highlight_duration=500
@@ -392,7 +366,11 @@ let g:SignatureMarkTextHL='None'
 let g:gruvbox_contrast_light='hard'
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
-colorscheme protanone
+" colorscheme gruvbox
+colorscheme onehalfdark
+" set background=dark
+" colorscheme solarized8_dark
+" colorscheme base16-onedark
 " #############################################################################
 " extended colorscheme
 " #############################################################################
@@ -415,4 +393,31 @@ hi! link IncSearch PMenu
 if filereadable($HOME.'/.config/nvim/init.vim.keymappings')
   so $HOME/.config/nvim/init.vim.keymappings
 endif
+if filereadable($HOME.'/.config/nvim/init.vim.dbprofiles')
+  so $HOME/.config/nvim/init.vim.dbprofiles
+endif
 
+
+" Load guard for the perltidy scripts
+if ( exists('g:perltidy_loaded') && g:perltidy_loaded )
+    \ || v:version < 700 || &cp
+    finish
+endif
+let g:perltidy_loaded = 1
+
+" Define :Tidy command to run perltidy on visual selection || entire buffer
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy -pbp -bl -sbl -pt=2
+
+" Run :Tidy on entire buffer and return cursor to original position
+fun DoTidy()
+    let l = line(".")
+    let c = col(".")
+    :Tidy
+    call cursor(l, c)
+endfun
+
+" Shortcut for normal mode to run on entire buffer then return to current line
+au Filetype perl nmap <F3> :call DoTidy()<CR>
+
+" Shortcut for visual mode to run on the the current visual selection
+au Filetype perl vmap <F3> :Tidy<CR>

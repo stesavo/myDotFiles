@@ -37,11 +37,12 @@ nmap <leader>t :BTags<CR>
 "##############################################################################
 
 let g:NumberToggleTrigger="<F2>"
+nnoremap <F2> :TestSuite<cr>
 nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :NeoCompleteToggle<cr>
 nnoremap <F5> :UndotreeToggle<cr>
-nnoremap <F9> :TestSuite<cr>
 nmap <F8> :TagbarToggle<CR>
+let g:UltiSnipsExpandTrigger = '<F9>'
 " entfernt Search Highlight
 nnoremap <F12> : let @/ = "" <CR>
 
