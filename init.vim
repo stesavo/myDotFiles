@@ -126,6 +126,8 @@ set ignorecase
 set smartcase
 set inccommand=split
 set incsearch
+"treat - as word character
+set iskeyword+=-
 set keymodel=startsel,stopsel
 set laststatus=2
 set list
@@ -149,7 +151,7 @@ set updatetime=500
 set virtualedit=block
 set whichwrap=b,s,<,>,[,]
 set wildmenu
-set wildmode=full
+set wildmode=longest,full
 syntax enable
 
 cab Help vert bo help
@@ -367,7 +369,7 @@ let g:gruvbox_contrast_light='hard'
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
 " colorscheme gruvbox
-colorscheme onehalfdark
+colorscheme protanone
 " set background=dark
 " colorscheme solarized8_dark
 " colorscheme base16-onedark
