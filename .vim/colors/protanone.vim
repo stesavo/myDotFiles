@@ -113,7 +113,7 @@ call s:h("SignColumn", s:fg, "", "")
 call s:h("MatchParen", s:blue, "", "underline")
 call s:h("SpecialKey", s:fg, "", "")
 call s:h("Title", s:green, "", "")
-call s:h("WildMenu", s:fg, "", "")
+call s:h("WildMenu", s:black, s:yellow, "")
 " }
 
 
