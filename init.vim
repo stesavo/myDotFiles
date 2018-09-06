@@ -112,6 +112,7 @@ set foldcolumn=2
 set foldlevel=20
 set foldlevelstart=20
 set foldmethod=manual
+set guicursor=
 set guifont=Hack\ 14
 set helplang=en
 set hidden
