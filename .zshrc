@@ -16,9 +16,6 @@ then
     curl -sL https://git.io/antibody | bash -s
 fi
 
-source <(antibody init)
-antibody bundle robbyrussell/oh-my-zsh/ folder:plugins/svn
-antibody bundle zdharma/fast-syntax-highlighting
 ################################################################################################################
 
 # always show alternatives after TAB auto-completion
@@ -49,21 +46,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ################################################################################################################
-# svn
-prompt_svn() {
-    local rev branch
-    if in_svn; then
-        rev=$(svn_get_rev_nr)
-        branch=$(svn_get_branch_name)
-        if [[ $(svn_dirty_choose_pwd 1 0) -eq 1 ]]; then
-            local color='%F{black}'
-            echo -n "%{$color%}$rev@$branch "
-        else
-            local color='%F{green}'
-            echo -n "%{$color%}$rev@$branch "
-        fi
-    fi
-}
+
 # powerlevel9k setup
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
@@ -72,6 +55,9 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="▷ "
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=6
-POWERLEVEL9K_SVN="prompt_svn"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh context virtualenv dir dir_writable root_indicator)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs svn history background_jobs time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history background_jobs load time)
+
+export EDITOR=nvim
+export VISUAL=nvim
+alias vim=nvim

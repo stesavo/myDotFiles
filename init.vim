@@ -69,6 +69,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'stesavo/dbext.vim'
 Plug 'w0rp/ale'
+Plug 'alcesleo/vim-uppercase-sql'
 " Plug 'zeis/vim-kolor'
 call plug#end()
 
@@ -90,11 +91,6 @@ filetype plugin indent on
 set modeline
 set modelines=100
 
-if &term =~? '256color'
-" disable Background Color Erase in 256 color tmux
-" so that colorschemes render correctly
-set t_ut=
-endif
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
 
 set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
@@ -110,7 +106,6 @@ autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white 
 set backspace=indent,eol,start
 set backup
 set cmdwinheight=25
-set colorcolumn=125
 set cursorline
 set diffopt=vertical,filler
 set foldcolumn=2
@@ -126,8 +121,6 @@ set ignorecase
 set smartcase
 set inccommand=split
 set incsearch
-"treat - as word character
-set iskeyword+=-
 set keymodel=startsel,stopsel
 set laststatus=2
 set list
@@ -151,7 +144,7 @@ set updatetime=500
 set virtualedit=block
 set whichwrap=b,s,<,>,[,]
 set wildmenu
-set wildmode=longest,full
+set wildmode=longest,list,full
 syntax enable
 
 cab Help vert bo help
@@ -355,6 +348,7 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 
 "ale
+let g:ale_enabled = 0
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
