@@ -32,7 +32,7 @@ let s:comment_fg  = { "gui": "#7d8799", "cterm": "241" }
 let s:gutter_bg   = { "gui": "#282c34", "cterm": "236" }
 let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
 
-let s:cursor_line = { "gui": "#313640", "cterm": "237" }
+let s:cursor_line = { "gui": "#252930", "cterm": "237" }
 let s:color_col   = { "gui": "#313640", "cterm": "237" }
 
 let s:selection   = { "gui": "#444444", "cterm": "239" }
@@ -56,7 +56,6 @@ function! s:h(group, fg, bg, attr)
     exec "hi " . a:group . " gui=NONE cterm=NONE"
   endif
 endfun
-
 
 " User interface colors {
 call s:h("Normal", s:fg, s:bg, "")
@@ -217,3 +216,17 @@ hi link gitcommitUnmergedArrow gitcommitUnmergedFile
     let g:terminal_color_foreground = s:fg.gui
   endif
 " }
+" #############################################################################
+" extended colorscheme
+" #############################################################################
+" template toolkit
+hi def link ttKeywords Statement
+highlight link ttTagRegion Identifier
+hi ttOperators ctermfg=darkblue
+hi ttIdentifier ctermfg=lightgray
+" tagbar
+hi TagbarHighlight ctermbg=darkgreen ctermfg=black
+" onehalf tweaks
+highlight PMenuSel none
+highlight link PMenuSel Visual
+hi! link IncSearch PMenu

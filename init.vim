@@ -328,13 +328,6 @@ augroup vimrc
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 augroup END
 
-"Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
 "VC
 set shell=/bin/bash
 let g:vc_auth_errno=215004
@@ -360,30 +353,8 @@ let g:ale_echo_msg_format='%linter%: %s (%severity%)'
 "signature
 let g:SignatureMarkTextHL='None'
 
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_contrast_dark='medium'
-let g:gruvbox_invert_selection=0
-" colorscheme gruvbox
 colorscheme protanone
-" set background=dark
-" colorscheme solarized8_dark
-" colorscheme base16-onedark
-" #############################################################################
-" extended colorscheme
-" #############################################################################
-" template toolkit
-hi def link ttKeywords Statement
-highlight link ttTagRegion Identifier
-hi ttOperators ctermfg=darkblue
-hi ttIdentifier ctermfg=lightgray
-" ctrlp
-highlight link CtrlPMatch Search
-" tagbar
-hi TagbarHighlight ctermbg=darkgreen ctermfg=black
-" onehalf tweaks
-highlight PMenuSel none
-highlight link PMenuSel Visual
-hi! link IncSearch PMenu
+
 " #############################################################################
 " extended rc file
 " #############################################################################
