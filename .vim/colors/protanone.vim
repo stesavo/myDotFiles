@@ -32,7 +32,7 @@ let s:comment_fg  = { "gui": "#7d8799", "cterm": "241" }
 let s:gutter_bg   = { "gui": "#282c34", "cterm": "236" }
 let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
 
-let s:cursor_line = { "gui": "#252930", "cterm": "237" }
+let s:cursor_line = { "gui": "#202426", "cterm": "237" }
 let s:color_col   = { "gui": "#313640", "cterm": "237" }
 
 let s:selection   = { "gui": "#444444", "cterm": "239" }
