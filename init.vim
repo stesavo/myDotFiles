@@ -103,6 +103,8 @@ highlight SpecialKey ctermfg=darkgrey
 autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
 autocmd Colorscheme * highlight NonText ctermfg=239 guifg=#555588
 autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
 set backspace=indent,eol,start
 set backup
 set cmdwinheight=25
