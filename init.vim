@@ -26,8 +26,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin($HOME.'/.config/nvim/bundle')
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips'
 Plug 'artnez/vim-wipeout'
 Plug 'bronson/vim-visual-star-search'
@@ -354,6 +356,9 @@ let g:ale_echo_msg_format='%linter%: %s (%severity%)'
 
 "signature
 let g:SignatureMarkTextHL='None'
+
+"LanguageClient
+
 
 colorscheme protanone
 
