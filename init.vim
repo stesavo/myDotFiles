@@ -90,17 +90,19 @@ scriptencoding utf-8
 " #############################################################################
 " COLOR SCHEME
 " #############################################################################
+autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
+autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=#774444
+"EndOfLine Color
+autocmd ColorScheme * highlight NonText ctermfg=darkgrey guifg=#4a4a59
+"Tab Color
+autocmd ColorScheme * highlight SpecialKey ctermfg=darkgrey
+
 if (len(getcompletion('protanone', 'color')) == 1)
     colorscheme protanone
 else
     colorscheme slate
     set nocursorline
 endif
-"EndOfLine Color
-highlight NonText ctermfg=darkgrey guifg=#4a4a59
-"Tab Color
-highlight SpecialKey ctermfg=darkgrey
-autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
 
 " #############################################################################
 " EXTENDED RC FILE
