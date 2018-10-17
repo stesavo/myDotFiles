@@ -51,7 +51,6 @@ set selectmode=key
 set shiftwidth=4
 set showcmd
 set showtabline=1
-set smartcase
 set spelllang=en,de_20
 set tabstop=4
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
@@ -91,7 +90,10 @@ scriptencoding utf-8
 " COLOR SCHEME
 " #############################################################################
 autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
-autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=#774444
+autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=grey
+autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
 "EndOfLine Color
 autocmd ColorScheme * highlight NonText ctermfg=darkgrey guifg=#4a4a59
 "Tab Color
@@ -159,6 +161,7 @@ if (executable('git') && executable('curl'))
     Plug 'justinmk/vim-sneak'
     Plug 'kshenoy/vim-signature'
     Plug 'lifepillar/vim-solarized8'
+    Plug 'ludovicchabant/vim-gutentags'
     Plug 'machakann/vim-highlightedyank'
     Plug 'majutsushi/tagbar'
     Plug 'mbbill/undotree'
@@ -370,9 +373,6 @@ if (executable('git') && executable('curl'))
     "sneak
     let g:sneak#label = 1
     let g:sneak#use_ic_scs = 1
-    autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
-    autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
-    autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
 
     "ale
     let g:ale_enabled = 0
@@ -387,4 +387,13 @@ if (executable('git') && executable('curl'))
     let g:SignatureMarkTextHL='None'
 
     "LanguageClient
+
+    "gutentags
+    let g:gutentags_enabled = 0
+    let g:gutentags_add_default_project_roots = 0
+    let g:gutentags_generate_on_missing = 0
+    let g:gutentags_project_root = ['.tags']
+    au Filetype perl let g:gutentags_enabled = 1
+
+
 endif
