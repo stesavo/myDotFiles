@@ -119,7 +119,6 @@ endif
 " #############################################################################
 " PLUGINS
 " #############################################################################
-" todo conditional loading of plugins requiring python setup
 if (executable('git') && executable('curl'))
     " requires setup as described https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
     let g:python_host_prog = $HOME.'/.pyenv/versions/neovim2/bin/python'
@@ -138,14 +137,15 @@ if (executable('git') && executable('curl'))
     call plug#begin($HOME.'/.config/nvim/bundle')
     Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
     Plug 'NLKNguyen/papercolor-theme'
-    Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neco-vim'
-    Plug 'Shougo/deoplete.nvim'
+    if (has('python3') && has('timers'))
+        Plug 'Shougo/neco-syntax'
+        Plug 'Shougo/neco-vim'
+        Plug 'Shougo/deoplete.nvim'
+    endif
     Plug 'SirVer/ultisnips'
     Plug 'artnez/vim-wipeout'
     Plug 'bronson/vim-visual-star-search'
     Plug 'chrisbra/vim-diff-enhanced'
-    Plug 'chriskempson/base16-vim'
     Plug 'coot/vim_args'
     Plug 'dahu/vim-lotr'
     Plug 'ervandew/supertab'
@@ -159,17 +159,19 @@ if (executable('git') && executable('curl'))
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align'
     Plug 'justinmk/vim-sneak'
-    Plug 'kshenoy/vim-signature'
+    if (has('signs'))
+        Plug 'kshenoy/vim-signature'
+    endif
     Plug 'lifepillar/vim-solarized8'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'machakann/vim-highlightedyank'
     Plug 'majutsushi/tagbar'
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-signify'
-    Plug 'mileszs/ack.vim'
+    if (executable('ag'))
+        Plug 'mileszs/ack.vim'
+    endif
     Plug 'moll/vim-bbye'
-    Plug 'morhetz/gruvbox'
-    Plug 'nanotech/jellybeans.vim'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'rickhowe/spotdiff.vim'
     Plug 'roxma/vim-tmux-clipboard'
@@ -185,7 +187,6 @@ if (executable('git') && executable('curl'))
     Plug 'w0rp/ale'
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'wellle/tmux-complete.vim'
-    " Plug 'zeis/vim-kolor'
     call plug#end()
 
     " #############################################################################
@@ -200,12 +201,12 @@ if (executable('git') && executable('curl'))
 
     " Ack
     if executable('ag')
-      let g:ackprg = 'ag --vimgrep --group'
-      endif
-    let g:ackhighlight = 1
-    let g:ack_autofold_results = 0
-    let g:ack_qhandler = 'botright copen 10'
-    let g:ack_apply_qmappings=1
+        let g:ackprg = 'ag --vimgrep --group'
+        let g:ackhighlight = 1
+        let g:ack_autofold_results = 0
+        let g:ack_qhandler = 'botright copen 10'
+        let g:ack_apply_qmappings=1
+    endif
 
     " SuperTab
     let g:SuperTabMappingForward = '<s-tab>'
@@ -216,7 +217,9 @@ if (executable('git') && executable('curl'))
     set nopaste
 
     "deoplete
-    let g:deoplete#enable_at_startup = 1
+    if (has('python3') && has('timers'))
+        let g:deoplete#enable_at_startup = 1
+    endif
 
     "undotree
     if !exists('g:undotree_WindowLayout')
@@ -384,7 +387,9 @@ if (executable('git') && executable('curl'))
     let g:ale_echo_msg_format='%linter%: %s (%severity%)'
 
     "signature
-    let g:SignatureMarkTextHL='None'
+    if (has('signs'))
+        let g:SignatureMarkTextHL='None'
+    endif
 
     "LanguageClient
 
