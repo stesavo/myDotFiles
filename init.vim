@@ -1,13 +1,20 @@
+scriptencoding utf-8
+if (has('nvim'))
+    let s:vimBaseDir = $HOME.'/.config/nvim/'
+else
+    let s:vimBaseDir = $HOME.'/.vim/'
+endif
 " #############################################################################
 " USE EXTENDED TERMINAL CAPABILITIES
 " #############################################################################
 "enable italics
 let &t_ZH = "\e[3m"
 let &t_ZR = "\e[23m"
-
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-if has('termguicolors')
-    set termguicolors
+if (has('nvim'))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    if has('termguicolors')
+        set termguicolors
+    endif
 endif
 
 " #############################################################################
@@ -30,7 +37,9 @@ set helplang=en
 set hidden
 set history=50
 set hlsearch
-set inccommand=split
+if (has('nvim'))
+    set inccommand=split
+endif
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
@@ -65,8 +74,8 @@ set wildmode=longest,list,full
 " CONDITIONAL OPTIONS
 " #############################################################################
 if has('persistent_undo')
-    if !isdirectory($HOME.'/.vim_undo_history')
-        call mkdir($HOME.'/.vim_undo_history', '', 0700)
+    if !isdirectory(s:vimBaseDir.'undo_history')
+        call mkdir(s:vimBaseDir.'undo_history', '', 0700)
     endif
     set undolevels=100          " How many undos
     set undoreload=1000         " number of lines to save for undo
@@ -78,13 +87,9 @@ endif
 " SETUP & CUSTOMIZATION
 " #############################################################################
 filetype plugin indent on
-let g:sessionDir = $HOME . '/.vim_sessions'
-syntax enable
+let g:sessionDir = s:vimBaseDir.'/.vim_sessions'
 cab Help vert bo help
-if &diff
-    syntax off
-endif
-scriptencoding utf-8
+syntax enable
 
 " #############################################################################
 " COLOR SCHEME
@@ -125,7 +130,7 @@ if (executable('git') && executable('curl'))
     let g:python3_host_prog = $HOME.'/.pyenv/versions/neovim3/bin/python'
 
     " autoload of vim-plug
-    if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    if empty(glob(s:vimBaseDir.'autoload/plug.vim'))
           silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
               \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
             augroup vimrc_plug_init
@@ -134,10 +139,10 @@ if (executable('git') && executable('curl'))
             augroup END
     endif
 
-    call plug#begin($HOME.'/.config/nvim/bundle')
+    call plug#begin(s:vimBaseDir.'plugins_vim-plug')
     Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
     Plug 'NLKNguyen/papercolor-theme'
-    if (has('python3') && has('timers'))
+    if (has('nvim') && has('python3') && has('timers'))
         Plug 'Shougo/neco-syntax'
         Plug 'Shougo/neco-vim'
         Plug 'Shougo/deoplete.nvim'
@@ -293,13 +298,6 @@ if (executable('git') && executable('curl'))
     " signify
     let g:signify_vcs_list = ['svn', 'git']
     let g:signify_realtime = 0
-
-    " EnhancedDiff
-    " started In Diff-Mode set diffexpr (plugin not loaded yet)
-    if &diff
-        let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
-        windo set syn=OFF
-    endif
 
     "lightline
     let g:lightline = {
