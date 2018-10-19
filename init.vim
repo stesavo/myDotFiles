@@ -184,7 +184,6 @@ if (executable('git') && executable('curl'))
     Plug 'sheerun/vim-polyglot'
     Plug 'sonph/onehalf', {'rtp': 'vim/'}
     Plug 'tmhedberg/matchit'
-    Plug 'tmux-plugins/vim-tmux-focus-events'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'stesavo/dbext.vim'
