@@ -179,7 +179,6 @@ if (executable('git') && executable('curl'))
     Plug 'moll/vim-bbye'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'rickhowe/spotdiff.vim'
-    Plug 'roxma/vim-tmux-clipboard'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
