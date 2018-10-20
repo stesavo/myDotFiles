@@ -13,7 +13,7 @@ syntax reset
 let g:colors_name="proton"
 let colors_name="proton"
 
-let s:primary_dark            = { "gui": "#003926", "cterm": "235" }
+let s:primary_dark            = { "gui": "#003926", "cterm": "235"}
 let s:primary_semi_dark       = { "gui": "#004730", "cterm": "237"}
 let s:primary                 = { "gui": "#277159", "cterm": "239"}
 let s:primary_semi_bright     = { "gui": "#5B907F", "cterm": "241"}
@@ -103,7 +103,7 @@ call s:h("Visual", s:primary_bright, s:primary_semi_dark, "")
 call s:h("VisualNOS", "", s:primary_semi_dark, "")
 
 call s:h("ColorColumn", "", s:primary_semi_dark, "")
- call s:h("Conceal", "", "", "")
+call s:h("Conceal", "", "", "")
 call s:h("Directory", s:secondary_2, "", "")
 call s:h("VertSplit", s:primary_semi_dark, s:primary, "")
 call s:h("Folded", s:complement_semi_bright, s:complement, "")
@@ -114,3 +114,45 @@ call s:h("MatchParen", "", "", "underline")
 call s:h("SpecialKey", s:primary_semi_bright, "", "")
 call s:h("Title", s:primary_bright, "", "bold")
 call s:h("WildMenu", s:secondary_2_dark, s:secondary_2, "")
+
+" Syntax colors {
+call s:h("Comment", s:primary, s:primary_dark, "")
+call s:h("Constant", s:primary_semi_bright, s:primary_dark, "")
+call s:h("String", s:primary_bright, s:primary_dark, "")
+call s:h("Character", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Number", s:primary_bright, s:primary_dark, "")
+call s:h("Boolean", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Float", s:primary_semi_bright, s:primary_dark, "")
+
+call s:h("Identifier", s:complement_semi_bright, s:primary_dark, "")
+call s:h("Function", s:secondary_2, s:primary_dark, "")
+call s:h("Statement", s:secondary_2, s:primary_dark, "italic,bold")
+
+call s:h("Conditional", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Repeat", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Label", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Operator", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Keyword", s:secondary_2, s:primary_dark, "")
+call s:h("Exception", s:primary_semi_bright, s:primary_dark, "")
+
+call s:h("PreProc", s:secondary_2, s:primary_dark, "")
+call s:h("Include", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Define", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Macro", s:primary_semi_bright, s:primary_dark, "")
+call s:h("PreCondit", s:primary_semi_bright, s:primary_dark, "")
+
+call s:h("Type", s:secondary_1_bright, s:primary_dark, "bold")
+call s:h("StorageClass", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Structure", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Typedef", s:primary_semi_bright, s:primary_dark, "")
+
+call s:h("Special", s:primary_semi_bright, s:primary_dark, "")
+call s:h("SpecialChar", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Tag", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Delimiter", s:secondary_1_bright, s:primary_dark, "bold")
+call s:h("SpecialComment", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Debug", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Underlined", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Ignore", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Error", s:primary_semi_bright, s:primary_dark, "")
+call s:h("Todo", s:primary_semi_bright, s:primary_dark, "")
