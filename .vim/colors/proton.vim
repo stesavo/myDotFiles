@@ -16,14 +16,14 @@ let colors_name="proton"
 let s:primary_dark            = { "gui": "#003926", "cterm": "235"}
 let s:primary_semi_dark       = { "gui": "#004730", "cterm": "237"}
 let s:primary                 = { "gui": "#277159", "cterm": "239"}
-let s:primary_semi_bright     = { "gui": "#5B907F", "cterm": "241"}
-let s:primary_bright          = { "gui": "#9CABA6", "cterm": "243"}
+let s:primary_semi_bright     = { "gui": "#5B907F", "cterm": "243"}
+let s:primary_bright          = { "gui": "#9CABA6", "cterm": "247"}
 
-let s:secondary_1_dark        = { "gui": "#1D013A", "cterm": "128"}
-let s:secondary_1_semi_dark   = { "gui": "#250448", "cterm": "134"}
-let s:secondary_1             = { "gui": "#4F2D73", "cterm": "140"}
-let s:secondary_1_semi_bright = { "gui": "#9981B2", "cterm": "146"}
-let s:secondary_1_bright      = { "gui": "#A6A0AE", "cterm": "152"}
+let s:secondary_1_dark        = { "gui": "#080D3B", "cterm": "128"}
+let s:secondary_1_semi_dark   = { "gui": "#191F58", "cterm": "134"}
+let s:secondary_1             = { "gui": "#525495", "cterm": "140"}
+let s:secondary_1_semi_bright = { "gui": "#7379B3", "cterm": "146"}
+let s:secondary_1_bright      = { "gui": "#8D92C0", "cterm": "152"}
 
 let s:secondary_2_dark        = { "gui": "#565000", "cterm": "196"}
 let s:secondary_2_semi_dark   = { "gui": "#6B6300", "cterm": "202"}
@@ -32,12 +32,12 @@ let s:secondary_2_semi_bright = { "gui": "#D9D389", "cterm": "214"}
 let s:secondary_2_bright      = { "gui": "#FFFEE9", "cterm": "220"}
 
 let s:complement_dark         = { "gui": "#561D00", "cterm": "197"}
-let s:complement_semi_dark    = { "gui": "#6B2400", "cterm": "203"}
+let s:complement_semi_dark    = { "gui": "#8c2e00", "cterm": "203"}
 let s:complement              = { "gui": "#AA603A", "cterm": "209"}
 let s:complement_semi_bright  = { "gui": "#D9A489", "cterm": "215"}
 let s:complement_bright       = { "gui": "#FFF0E9", "cterm": "221"}
 
-let s:black                   = { "gui": "#000000", "cterm": "236" }
+let s:black                   = { "gui": "#0b1e18", "cterm": "236" }
 let s:red                     = { "gui": "#e06c75", "cterm": "168" }
 let s:green                   = { "gui": "#98c379", "cterm": "114" }
 let s:yellow                  = { "gui": "#e5c07b", "cterm": "180" }
@@ -79,7 +79,7 @@ call s:h("CursorLineNr", s:primary_bright, "", "")
 
 call s:h("DiffAdd", s:green, "", "")
 call s:h("DiffChange", "", "", "")
-call s:h("DiffDelete", s:red, s:black, "")
+call s:h("DiffDelete", s:primary_dark, s:black, "bold")
 call s:h("DiffText", s:yellow, "", "")
 
 call s:h("IncSearch", s:complement_bright, s:complement, "bold")
@@ -106,7 +106,7 @@ call s:h("StatusLine", s:primary_semi_dark, s:primary_semi_bright, "")
 call s:h("StatusLineNC", s:primary_semi_dark, s:primary, "")
 call s:h("TabLine", s:primary_semi_dark, s:primary, "")
 call s:h("TabLineFill", s:primary_semi_dark, s:primary, "")
-call s:h("TabLineSel", s:primary_semi_dark, s:primary, "")
+call s:h("TabLineSel", s:primary_semi_dark, s:primary_bright, "")
 
 call s:h("Visual", s:primary_bright, s:primary_semi_dark, "")
 call s:h("VisualNOS", "", s:primary_semi_dark, "")
@@ -115,7 +115,7 @@ call s:h("ColorColumn", "", s:primary_semi_dark, "")
 call s:h("Conceal", "", "", "")
 call s:h("Directory", s:secondary_2, "", "")
 call s:h("VertSplit", s:primary_semi_dark, s:primary, "")
-call s:h("Folded", s:complement_semi_bright, s:complement, "")
+call s:h("Folded", s:secondary_1_dark, s:secondary_1, "")
 call s:h("FoldColumn", s:primary, s:primary_dark, "")
 call s:h("SignColumn", s:complement_semi_bright, s:primary_dark, "bold")
 

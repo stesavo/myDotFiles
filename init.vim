@@ -92,26 +92,6 @@ cab Help vert bo help
 syntax enable
 
 " #############################################################################
-" COLOR SCHEME
-" #############################################################################
-autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
-autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=grey
-autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
-autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
-autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
-"EndOfLine Color
-autocmd ColorScheme * highlight NonText ctermfg=darkgrey guifg=#4a4a59
-"Tab Color
-autocmd ColorScheme * highlight SpecialKey ctermfg=darkgrey
-
-if (len(getcompletion('protanone', 'color')) == 1)
-    colorscheme protanone
-else
-    colorscheme slate
-    set nocursorline
-endif
-
-" #############################################################################
 " EXTENDED RC FILE
 " #############################################################################
 if filereadable($HOME.'/.config/nvim/init.vim.keymappings')
@@ -156,7 +136,6 @@ if (executable('git') && executable('curl'))
     Plug 'ervandew/supertab'
     Plug 'guns/xterm-color-table.vim'
     Plug 'honza/vim-snippets'
-    Plug 'itchyny/lightline.vim'
     Plug 'janko-m/vim-test'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
     Plug 'juneedahamed/vc.vim'
@@ -250,6 +229,9 @@ if (executable('git') && executable('curl'))
     if !exists('g:undotree_HighlightSyntaxChange')
         let g:undotree_HighlightSyntaxChange = 'DiffChange'
     endif
+    if !exists('g:undotree_HighlightSyntaxDel')
+        let g:undotree_HighlightSyntaxDel = "DiffDelete"
+    endif
 
     "Silver Searcher
     if executable('ag')
@@ -296,51 +278,6 @@ if (executable('git') && executable('curl'))
     " signify
     let g:signify_vcs_list = ['svn', 'git']
     let g:signify_realtime = 0
-
-    "lightline
-    let g:lightline = {
-                \ 'colorscheme': 'onehalfdark',
-                \ 'component': {
-                \ },
-                \ 'separator': { 'left': '', 'right': '' },
-                \ 'subseparator': { 'left': '', 'right': '' }
-                \ }
-    let g:lightline.component = {
-        \ 'mode': '%{lightline#mode()}',
-        \ 'absolutepath': '%F',
-        \ 'relativepath': '%f',
-        \ 'filename': '%t',
-        \ 'modified': '%{&modified?"!":" "}',
-        \ 'bufnum': '%n',
-        \ 'paste': '%{&paste?"PASTE":""}',
-        \ 'readonly': '%{&readonly?"":""}',
-        \ 'charvalue': '%b',
-        \ 'charvaluehex': '%B',
-        \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-        \ 'fileformat': '%{&ff}',
-        \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-        \ 'percent': '%3p%%',
-        \ 'percentwin': '%P',
-        \ 'spell': '%{&spell?&spelllang:""}',
-        \ 'lineinfo': '%3l:%-2v',
-        \ 'line': '%l',
-        \ 'column': '%c',
-        \ 'path' : '%{expand("%:h")}/',
-        \ 'close': '%999X X ' }
-    let g:lightline.active = {
-        \ 'left': [ [ 'mode', 'paste' ],
-        \           [ 'path'],
-        \            [ 'filename' ] ],
-        \ 'right': [ [ 'lineinfo' ],
-        \            [ 'percent' ],
-        \            [ 'modified', 'readonly', 'fileformat', 'fileencoding', 'filetype' ] ] }
-    let g:lightline.inactive = {
-        \ 'left': [ [ 'readonly', 'filename' ] ],
-        \ 'right': [ [ 'lineinfo' ],
-        \            [ 'percent' ] ] }
-    let g:lightline.tabline = {
-        \ 'left': [ [ 'tabs' ] ],
-        \ 'right': [ [ 'close' ] ] }
 
     " LOTR
     let g:lotr_position = 'top'
@@ -398,3 +335,38 @@ if (executable('git') && executable('curl'))
 
 
 endif
+
+" #############################################################################
+" COLOR SCHEME (should come after plugin section in case a colorscheme
+"               is loaded as a plugin)
+" #############################################################################
+" autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
+" autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=grey
+autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
+autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
+"EndOfLine Color
+" autocmd ColorScheme * highlight NonText ctermfg=darkgrey guifg=#4a4a59
+"Tab Color
+" autocmd ColorScheme * highlight SpecialKey ctermfg=darkgrey
+
+if (len(getcompletion('proton', 'color')) == 1)
+    colorscheme proton
+else
+    colorscheme slate
+    set nocursorline
+endif
+
+" #############################################################################
+" STATUS LINE
+" #############################################################################
+set statusline=
+set statusline+=\[%n]                                  "buffernr
+set statusline+=\ %<%F\                                "File+path
+set statusline+=\ %y\                                  "FileType
+set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..)
+set statusline+=\ %=\ row:%l/%L                        "Rownumber/total (%)
+set statusline+=\ col:%03c\                            "Colnr
+set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
