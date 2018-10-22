@@ -108,7 +108,7 @@ call s:h("TabLine", s:primary_semi_dark, s:primary, "")
 call s:h("TabLineFill", s:primary_semi_dark, s:primary, "")
 call s:h("TabLineSel", s:primary_semi_dark, s:primary_bright, "")
 
-call s:h("Visual", s:primary_bright, s:primary_semi_dark, "")
+call s:h("Visual", s:white, s:secondary_2_semi_dark, "")
 call s:h("VisualNOS", "", s:primary_semi_dark, "")
 
 call s:h("ColorColumn", "", s:primary_semi_dark, "")
