@@ -13,29 +13,30 @@ syntax reset
 let g:colors_name="proton"
 let colors_name="proton"
 
-let s:primary_dark            = { "gui": "#003926", "cterm": "235"}
-let s:primary_semi_dark       = { "gui": "#004730", "cterm": "237"}
-let s:primary                 = { "gui": "#277159", "cterm": "239"}
-let s:primary_semi_bright     = { "gui": "#5B907F", "cterm": "243"}
-let s:primary_bright          = { "gui": "#9CABA6", "cterm": "247"}
+let s:primary_dark            = { "gui": "#003926", "cterm": "235" }
+let s:primary_cursorline      = { "gui": "#004332", "cterm": "236" }
+let s:primary_semi_dark       = { "gui": "#004730", "cterm": "237" }
+let s:primary                 = { "gui": "#277159", "cterm": "239" }
+let s:primary_semi_bright     = { "gui": "#5B907F", "cterm": "243" }
+let s:primary_bright          = { "gui": "#9CABA6", "cterm": "249" }
 
-let s:secondary_1_dark        = { "gui": "#080D3B", "cterm": "128"}
-let s:secondary_1_semi_dark   = { "gui": "#191F58", "cterm": "134"}
-let s:secondary_1             = { "gui": "#525495", "cterm": "140"}
-let s:secondary_1_semi_bright = { "gui": "#7379B3", "cterm": "146"}
-let s:secondary_1_bright      = { "gui": "#8D92C0", "cterm": "152"}
+let s:secondary_1_dark        = { "gui": "#080D3B", "cterm": "128" }
+let s:secondary_1_semi_dark   = { "gui": "#191F58", "cterm": "134" }
+let s:secondary_1             = { "gui": "#525495", "cterm": "140" }
+let s:secondary_1_semi_bright = { "gui": "#8389C3", "cterm": "146" }
+let s:secondary_1_bright      = { "gui": "#9DA2D0", "cterm": "140" }
 
-let s:secondary_2_dark        = { "gui": "#565000", "cterm": "196"}
-let s:secondary_2_semi_dark   = { "gui": "#6B6300", "cterm": "202"}
-let s:secondary_2             = { "gui": "#AAA23A", "cterm": "208"}
-let s:secondary_2_semi_bright = { "gui": "#D9D389", "cterm": "214"}
-let s:secondary_2_bright      = { "gui": "#FFFEE9", "cterm": "220"}
+let s:secondary_2_dark        = { "gui": "#565000", "cterm": "196" }
+let s:secondary_2_semi_dark   = { "gui": "#6B6300", "cterm": "202" }
+let s:secondary_2             = { "gui": "#AAA23A", "cterm": "208" }
+let s:secondary_2_semi_bright = { "gui": "#D9D389", "cterm": "214" }
+let s:secondary_2_bright      = { "gui": "#FFFEE9", "cterm": "220" }
 
-let s:complement_dark         = { "gui": "#561D00", "cterm": "197"}
-let s:complement_semi_dark    = { "gui": "#8c2e00", "cterm": "203"}
-let s:complement              = { "gui": "#AA603A", "cterm": "209"}
-let s:complement_semi_bright  = { "gui": "#D9A489", "cterm": "215"}
-let s:complement_bright       = { "gui": "#FFF0E9", "cterm": "221"}
+let s:complement_dark         = { "gui": "#561D00", "cterm": "197" }
+let s:complement_semi_dark    = { "gui": "#8c2e00", "cterm": "203" }
+let s:complement              = { "gui": "#AA603A", "cterm": "203" }
+let s:complement_semi_bright  = { "gui": "#B98489", "cterm": "215" }
+let s:complement_bright       = { "gui": "#FFF0E9", "cterm": "221" }
 
 let s:black                   = { "gui": "#0b1e18", "cterm": "236" }
 let s:red                     = { "gui": "#e06c75", "cterm": "168" }
@@ -67,12 +68,11 @@ endfun
 
 " User interface colors {
 call s:h("Normal", s:primary_semi_bright, s:primary_dark, "")
-call s:h("NonText", s:complement, "", "")
 call s:h("ExtraWhitespace", "", s:complement, "")
 
 call s:h("Cursor", s:complement, s:complement_bright, "")
 call s:h("CursorColumn", "", s:primary_semi_dark, "")
-call s:h("CursorLine", "", s:primary_semi_dark, "")
+call s:h("CursorLine", "", s:primary_cursorline, "")
 
 call s:h("LineNr", s:primary, s:primary_dark, "")
 call s:h("CursorLineNr", s:primary_bright, "", "")
@@ -138,7 +138,6 @@ call s:h("Function", s:secondary_2, s:primary_dark, "")
 call s:h("Statement", s:secondary_2, s:primary_dark, "italic,bold")
 
 " call s:h("Conditional", s:primary_semi_bright, s:primary_dark, "")
-call s:h("Repeat", s:primary_semi_bright, s:primary_dark, "")
 call s:h("Label", s:primary_semi_bright, s:primary_dark, "")
 call s:h("Operator", s:secondary_2, s:primary_dark, "italic")
 " call s:h("Keyword", s:secondary_2, s:primary_dark, "")
@@ -172,7 +171,9 @@ call s:h("ttIdentifier", s:primary, "", "")
 call s:h("ttOperators", s:primary, "", "")
 
 "links
+hi! link NonText LineNr
 hi link StorageClass Statement
 hi link jsVariableDef Identifier
 hi link Conditional Statement
+hi link Repeat Statement
 hi link Keyword Type
