@@ -20,7 +20,6 @@ endif
 " #############################################################################
 " GENERAL OPTIONS
 " #############################################################################
-"set ignorecase !!! must not be set, breaks tags navigation
 set backspace=indent,eol,start
 set backup
 set cmdwinheight=25
@@ -40,10 +39,11 @@ set hlsearch
 if (has('nvim'))
     set inccommand=split
 endif
+set ignorecase
 set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
-set list
+set nolist
 set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
 set modeline
 set modelines=100
@@ -51,7 +51,7 @@ set nocursorcolumn
 set nospell
 set number
 set numberwidth=1
-set pastetoggle =<F10>
+set pastetoggle=<F10>
 set previewheight=5
 set ruler
 set scrolloff=10
@@ -60,6 +60,7 @@ set selectmode=key
 set shiftwidth=4
 set showcmd
 set showtabline=1
+set smartcase
 set spelllang=en,de_20
 set tabstop=4
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent autoindent smartindent
@@ -147,7 +148,6 @@ if (executable('git') && executable('curl'))
         Plug 'kshenoy/vim-signature'
     endif
     Plug 'lifepillar/vim-solarized8'
-    Plug 'ludovicchabant/vim-gutentags'
     Plug 'machakann/vim-highlightedyank'
     Plug 'majutsushi/tagbar'
     Plug 'mbbill/undotree'
@@ -166,9 +166,12 @@ if (executable('git') && executable('curl'))
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'stesavo/dbext.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'w0rp/ale'
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'wellle/tmux-complete.vim'
+    Plug 'Yggdroot/indentLine'
     call plug#end()
 
     " #############################################################################
@@ -326,29 +329,32 @@ if (executable('git') && executable('curl'))
 
     "LanguageClient
 
-    "gutentags
-    let g:gutentags_enabled = 0
-    let g:gutentags_add_default_project_roots = 0
-    let g:gutentags_generate_on_missing = 0
-    let g:gutentags_project_root = ['.tags']
-    au Filetype perl let g:gutentags_enabled = 1
+    "IndentLine
+    let g:indentLine_enabled = 0
+    let g:indentLine_setColors = 0
 
-
+    "BetterWhitespace
+    if (!&diff)
+        let g:better_whitespace_enabled = 0
+    endif
 endif
+
+"airline
+let g:airline_powerline_fonts                  = 1
+let g:airline_theme                            = 'tomorrow'
+let g:airline#extensions#tabline#enabled       = 1
+let g:airline#extensions#tabline#show_buffers  = 0
+let g:airline#extensions#tabline#tab_min_count = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#formatter     = 'unique_tail_improved'
 
 " #############################################################################
 " COLOR SCHEME (should come after plugin section in case a colorscheme
 "               is loaded as a plugin)
 " #############################################################################
-" autocmd Colorscheme * highlight Whitespace ctermfg=239 guifg=#555588
-" autocmd Colorscheme * highlight ExtraWhitespace guibg=#774444 guifg=grey
 autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
 autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
 autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
-"EndOfLine Color
-" autocmd ColorScheme * highlight NonText ctermfg=darkgrey guifg=#4a4a59
-"Tab Color
-" autocmd ColorScheme * highlight SpecialKey ctermfg=darkgrey
 
 if (len(getcompletion('proton', 'color')) == 1)
     colorscheme proton
@@ -360,13 +366,14 @@ endif
 " #############################################################################
 " STATUS LINE
 " #############################################################################
-set statusline=
-set statusline+=\[%n]                                  "buffernr
-set statusline+=\ %<%F\                                "File+path
-set statusline+=\ %y\                                  "FileType
-set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..)
-set statusline+=\ %=\ row:%l/%L                        "Rownumber/total (%)
-set statusline+=\ col:%03c\                            "Colnr
-set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+" set statusline=
+" set statusline+=\[%n]                                  "buffernr
+" set statusline+=%{expand('%:h')}/                      "directory of file
+" set statusline+=\%#StatusLineFilename#%t%*\            "Filename
+" set statusline+=\ %y\                                  "FileType
+" set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+" set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+" set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..)
+" set statusline+=\ %=\ row:%l/%L                        "Rownumber/total (%)
+" set statusline+=\ col:%03c\                            "Colnr
+" set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
