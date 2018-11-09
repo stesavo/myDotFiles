@@ -75,12 +75,13 @@ call s:h("CursorColumn", "", s:primary_semi_dark, "")
 call s:h("CursorLine", "", s:primary_cursorline, "")
 
 call s:h("LineNr", s:primary, s:primary_dark, "")
+call s:h("NonText", s:primary, "", "")
 call s:h("CursorLineNr", s:primary_bright, "", "")
 
-call s:h("DiffAdd", s:green, "", "")
-call s:h("DiffChange", "", "", "")
+call s:h("DiffAdd", s:green, s:primary_dark, "")
+call s:h("DiffChange", "", s:primary_dark, "")
 call s:h("DiffDelete", s:primary_dark, s:black, "bold")
-call s:h("DiffText", s:yellow, s:primary_cursorline, "")
+call s:h("DiffText", s:secondary_1_bright, s:primary_dark, "")
 
 call s:h("IncSearch", s:complement_bright, s:complement, "bold")
 call s:h("Search", s:primary_bright, s:complement, "bold")
@@ -122,7 +123,7 @@ call s:h("SignColumn", s:complement_semi_bright, s:primary_dark, "bold")
 call s:h("MatchParen", "", "", "underline")
 call s:h("SpecialKey", s:primary_semi_bright, "", "")
 call s:h("Title", s:primary_bright, "", "bold")
-call s:h("WildMenu", s:secondary_2_dark, s:secondary_2, "")
+call s:h("WildMenu", s:black, s:secondary_2, "bold")
 
 " Syntax colors {
 call s:h("Comment", s:primary, s:primary_dark, "")
@@ -154,7 +155,7 @@ call s:h("Structure", s:primary_semi_bright, s:primary_dark, "")
 call s:h("Typedef", s:primary_semi_bright, s:primary_dark, "")
 
 call s:h("Special", s:secondary_1_semi_bright, s:primary_dark, "bold")
-call s:h("SpecialChar", s:primary_semi_bright, s:primary_dark, "")
+call s:h("SpecialChar", s:white, s:primary_dark, "bold")
 call s:h("Tag", s:primary_semi_bright, s:primary_dark, "")
 call s:h("Delimiter", s:secondary_1_bright, s:primary_dark, "bold")
 call s:h("SpecialComment", s:primary_semi_bright, s:primary_dark, "")
@@ -171,9 +172,11 @@ call s:h("ttIdentifier", s:primary, "", "")
 call s:h("ttOperators", s:primary, "", "")
 
 "links
-hi! link NonText LineNr
 hi link StorageClass Statement
 hi link jsVariableDef Identifier
 hi link Conditional Statement
 hi link Repeat Statement
 hi link Keyword Type
+
+"plugin-specific
+call s:h("HighlightedyankRegion", s:white, s:secondary_2_semi_dark, "bold")

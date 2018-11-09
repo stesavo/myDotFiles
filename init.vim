@@ -157,7 +157,6 @@ if (executable('git') && executable('curl'))
     endif
     Plug 'moll/vim-bbye'
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'rickhowe/spotdiff.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
@@ -292,7 +291,7 @@ if (executable('git') && executable('curl'))
     set timeout timeoutlen=600 ttimeoutlen=0
 
     " highlightedyank
-    let g:highlightedyank_highlight_duration=500
+    let g:highlightedyank_highlight_duration=300
 
     "disable automatic continuation of comments
     augroup vimrc
@@ -333,9 +332,11 @@ if (executable('git') && executable('curl'))
     let g:indentLine_enabled = 0
     let g:indentLine_setColors = 0
 
-    "BetterWhitespace
+    "BetterWhitespace and list chars on diff
     if (!&diff)
         let g:better_whitespace_enabled = 0
+    else
+        set list
     endif
 endif
 
