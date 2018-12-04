@@ -11,7 +11,7 @@ nnoremap <leader>w :StripWhitespace<cr>
 
 "better whitespace, avoid accidental whitespace stripping
 unmap <leader>w
-nmap <leader>w :ToggleWhitespace<CR>
+nmap <leader>w :let g:better_whitespace_enabled=1<CR>:ToggleWhitespace<CR>
 
 "NERDTree
 map <leader>n :NERDTreeToggle<CR>
@@ -32,6 +32,9 @@ nmap ga <Plug>(EasyAlign)
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :BTags<CR>
 
+" horizontal scrolling
+map <C-h> 5zh
+map <C-l> 5zl
 "##############################################################################
 " F Keys
 "##############################################################################
@@ -39,7 +42,7 @@ nmap <leader>t :BTags<CR>
 let g:NumberToggleTrigger="<F2>"
 nnoremap <F2> :TestSuite<cr>
 nnoremap <F3> :NERDTreeToggle<CR>
-nnoremap <F4> :NeoCompleteToggle<cr>
+nnoremap <F4> :IndentLinesToggle<cr>
 nnoremap <F5> :UndotreeToggle<cr>
 nmap <F8> :TagbarToggle<CR>
 let g:UltiSnipsExpandTrigger = '<F9>'
