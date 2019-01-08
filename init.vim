@@ -91,6 +91,8 @@ filetype plugin indent on
 let g:sessionDir = s:vimBaseDir.'/.vim_sessions'
 cab Help vert bo help
 syntax enable
+" keep the cursor from jumping to next hit when pressing *
+nmap <silent> * "syiw<Esc>: let @/ = @s<CR>
 
 " #############################################################################
 " EXTENDED RC FILE
@@ -126,7 +128,7 @@ if (executable('git') && executable('curl'))
     if (has('nvim') && has('python3') && has('timers'))
         Plug 'Shougo/neco-syntax'
         Plug 'Shougo/neco-vim'
-        Plug 'Shougo/deoplete.nvim'
+        Plug 'Shougo/deoplete.nvim', {'tag': '4.0'}
     endif
     Plug 'SirVer/ultisnips'
     Plug 'artnez/vim-wipeout'
@@ -184,7 +186,13 @@ if (executable('git') && executable('curl'))
     let g:NERDTreeWinSize = 60
 
     " Ack
-    if executable('ag')
+    if executable('rg')
+        let g:ackprg = 'rg --vimgrep --smart-case --heading --ignore-file ~/.config/git/ignore'
+        let g:ackhighlight = 1
+        let g:ack_autofold_results = 0
+        let g:ack_qhandler = 'botright copen 10'
+        let g:ack_apply_qmappings=1
+    elseif executable('ag')
         let g:ackprg = 'ag --vimgrep --group'
         let g:ackhighlight = 1
         let g:ack_autofold_results = 0
@@ -348,6 +356,8 @@ let g:airline#extensions#tabline#show_buffers  = 0
 let g:airline#extensions#tabline#tab_min_count = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#formatter     = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#fnamemod = ':p:.'
 
 " #############################################################################
 " COLOR SCHEME (should come after plugin section in case a colorscheme
