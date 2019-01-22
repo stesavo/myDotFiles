@@ -101,11 +101,11 @@ nmap <silent> * "syiw<Esc>: let @/ = @s<CR>nN
 " #############################################################################
 " EXTENDED RC FILE
 " #############################################################################
-if filereadable($HOME.'/.config/nvim/init.vim.keymappings')
-  so $HOME/.config/nvim/init.vim.keymappings
+if filereadable(s:vimBaseDir . 'keymappings.vim')
+  execute 'source ' . s:vimBaseDir . 'keymappings.vim'
 endif
-if filereadable($HOME.'/.config/nvim/init.vim.dbprofiles')
-  so $HOME/.config/nvim/init.vim.dbprofiles
+if filereadable(s:vimBaseDir . 'init.vim.dbprofiles')
+  execute 'source ' . s:vimBaseDir . 'init.vim.dbprofiles'
 endif
 
 " #############################################################################
@@ -118,8 +118,7 @@ if (executable('git') && executable('curl'))
 
     " autoload of vim-plug
     if empty(glob(s:vimBaseDir.'autoload/plug.vim'))
-          silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+          execute '!curl -fLo ' . s:vimBaseDir . 'autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
             augroup vimrc_plug_init
               autocmd!
                 autocmd VimEnter * PlugInstall | source $MYVIMRC
@@ -158,7 +157,9 @@ if (executable('git') && executable('curl'))
     endif
     Plug 'lifepillar/vim-solarized8'
     Plug 'machakann/vim-highlightedyank'
-    Plug 'majutsushi/tagbar'
+    if (has('nvim') || v:version >= 704)
+        Plug 'majutsushi/tagbar'
+    endif
     Plug 'mbbill/undotree'
     Plug 'mhinz/vim-signify'
     if (executable('ag'))
@@ -178,7 +179,9 @@ if (executable('git') && executable('curl'))
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
     endif
-    Plug 'w0rp/ale'
+    if (has('nvim') || v:version >= 800)
+        Plug 'w0rp/ale'
+    endif
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'wellle/tmux-complete.vim'
     Plug 'will133/vim-dirdiff'
