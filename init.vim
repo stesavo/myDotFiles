@@ -44,7 +44,11 @@ set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
 set nolist
-set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
+if (has('nvim') || v:version >= 704)
+    set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
+else
+    set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>
+endif
 set modeline
 set modelines=100
 set nocursorcolumn
@@ -92,7 +96,7 @@ let g:sessionDir = s:vimBaseDir.'/.vim_sessions'
 cab Help vert bo help
 syntax enable
 " keep the cursor from jumping to next hit when pressing *
-nmap <silent> * "syiw<Esc>: let @/ = @s<CR>
+nmap <silent> * "syiw<Esc>: let @/ = @s<CR>nN
 
 " #############################################################################
 " EXTENDED RC FILE
@@ -121,16 +125,19 @@ if (executable('git') && executable('curl'))
                 autocmd VimEnter * PlugInstall | source $MYVIMRC
             augroup END
     endif
-
     call plug#begin(s:vimBaseDir.'plugins_vim-plug')
-    Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-    Plug 'NLKNguyen/papercolor-theme'
-    if (has('nvim') && has('python3') && has('timers'))
-        Plug 'Shougo/neco-syntax'
-        Plug 'Shougo/neco-vim'
-        Plug 'Shougo/deoplete.nvim', {'tag': '4.0'}
+    if (has('nvim') || v:version >= 704)
+        Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+        Plug 'NLKNguyen/papercolor-theme'
+        if (has('nvim') && has('python3') && has('timers'))
+            Plug 'Shougo/neco-syntax'
+            Plug 'Shougo/neco-vim'
+            Plug 'Shougo/deoplete.nvim', {'tag': '4.0'}
+        endif
     endif
-    Plug 'SirVer/ultisnips'
+    if (has('nvim') || v:version >= 704)
+        Plug 'SirVer/ultisnips'
+    endif
     Plug 'artnez/vim-wipeout'
     Plug 'bronson/vim-visual-star-search'
     Plug 'chrisbra/vim-diff-enhanced'
@@ -167,11 +174,14 @@ if (executable('git') && executable('curl'))
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'stesavo/dbext.vim'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    if (has('nvim') || v:version >= 704)
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+    endif
     Plug 'w0rp/ale'
     Plug 'alcesleo/vim-uppercase-sql'
     Plug 'wellle/tmux-complete.vim'
+    Plug 'will133/vim-dirdiff'
     Plug 'Yggdroot/indentLine'
     call plug#end()
 
@@ -367,24 +377,26 @@ autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white 
 autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
 autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
 
-if (len(getcompletion('proton', 'color')) == 1)
-    colorscheme proton
-else
-    colorscheme slate
-    set nocursorline
-endif
+    if (v:version >= 704 && len(getcompletion('proton', 'color')) == 1)
+        colorscheme proton
+    else
+        colorscheme slate
+        set nocursorline
+    endif
 
+if (!has('nvim') && v:version < 704)
 " #############################################################################
-" STATUS LINE
+"   STATUS LINE
 " #############################################################################
-" set statusline=
-" set statusline+=\[%n]                                  "buffernr
-" set statusline+=%{expand('%:h')}/                      "directory of file
-" set statusline+=\%#StatusLineFilename#%t%*\            "Filename
-" set statusline+=\ %y\                                  "FileType
-" set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-" set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-" set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..)
-" set statusline+=\ %=\ row:%l/%L                        "Rownumber/total (%)
-" set statusline+=\ col:%03c\                            "Colnr
-" set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+    set statusline=
+    set statusline+=\[%n]                                  "buffernr
+    set statusline+=%{expand('%:h')}/                      "directory of file
+    set statusline+=\%#StatusLineFilename#%t%*\            "Filename
+    set statusline+=\ %y\                                  "FileType
+    set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+    set statusline+=\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+    set statusline+=\ %{&ff}\                              "FileFormat (dos/unix..)
+    set statusline+=\ %=\ row:%l/%L                        "Rownumber/total (%)
+    set statusline+=\ col:%03c\                            "Colnr
+    set statusline+=\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+endif
