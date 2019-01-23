@@ -127,7 +127,6 @@ if (executable('git') && executable('curl'))
     call plug#begin(s:vimBaseDir.'plugins_vim-plug')
     if (has('nvim') || v:version >= 800)
         Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-        Plug 'NLKNguyen/papercolor-theme'
         if (has('nvim') && has('python3') && has('timers'))
             Plug 'Shougo/neco-syntax'
             Plug 'Shougo/neco-vim'
@@ -167,6 +166,7 @@ if (executable('git') && executable('curl'))
         Plug 'mileszs/ack.vim'
     endif
     Plug 'moll/vim-bbye'
+    Plug 'NLKNguyen/papercolor-theme'
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/nerdtree'
