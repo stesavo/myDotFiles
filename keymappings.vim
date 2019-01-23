@@ -45,7 +45,7 @@ nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :IndentLinesToggle<CR>
 nnoremap <F5> :UndotreeToggle<CR>
 nnoremap <F6> :Ack<CR>
-if (has('nvim') || v:version >= 704)
+if (has('nvim') || v:version >= 800)
     nmap <F8> :TagbarToggle<CR>
 endif
 let g:UltiSnipsExpandTrigger = '<F9>'

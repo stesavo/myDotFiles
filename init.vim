@@ -44,7 +44,7 @@ set incsearch
 set keymodel=startsel,stopsel
 set laststatus=2
 set nolist
-if (has('nvim') || v:version >= 704)
+if (has('nvim') || v:version >= 800)
     set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>,space:·
 else
     set listchars=tab:‣\ ,eol:¬,trail:·,precedes:<,extends:>
@@ -125,7 +125,7 @@ if (executable('git') && executable('curl'))
             augroup END
     endif
     call plug#begin(s:vimBaseDir.'plugins_vim-plug')
-    if (has('nvim') || v:version >= 704)
+    if (has('nvim') || v:version >= 800)
         Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
         Plug 'NLKNguyen/papercolor-theme'
         if (has('nvim') && has('python3') && has('timers'))
@@ -134,9 +134,10 @@ if (executable('git') && executable('curl'))
             Plug 'Shougo/deoplete.nvim', {'tag': '4.0'}
         endif
     endif
-    if (has('nvim') || v:version >= 704)
+    if (has('nvim') || v:version >= 800)
         Plug 'SirVer/ultisnips'
     endif
+    Plug 'alcesleo/vim-uppercase-sql'
     Plug 'artnez/vim-wipeout'
     Plug 'bronson/vim-visual-star-search'
     Plug 'chrisbra/vim-diff-enhanced'
@@ -157,7 +158,7 @@ if (executable('git') && executable('curl'))
     endif
     Plug 'lifepillar/vim-solarized8'
     Plug 'machakann/vim-highlightedyank'
-    if (has('nvim') || v:version >= 704)
+    if (has('nvim') || v:version >= 800)
         Plug 'majutsushi/tagbar'
     endif
     Plug 'mbbill/undotree'
@@ -175,14 +176,13 @@ if (executable('git') && executable('curl'))
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'stesavo/dbext.vim'
-    if (has('nvim') || v:version >= 704)
+    if (has('nvim') || v:version >= 800)
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
     endif
     if (has('nvim') || v:version >= 800)
         Plug 'w0rp/ale'
     endif
-    Plug 'alcesleo/vim-uppercase-sql'
     Plug 'wellle/tmux-complete.vim'
     Plug 'will133/vim-dirdiff'
     Plug 'Yggdroot/indentLine'
@@ -380,14 +380,14 @@ autocmd ColorScheme * highlight Sneak guifg=#333355 guibg=#BBBBDB ctermfg=white 
 autocmd ColorScheme * highlight SneakLabel guifg=#333355 guibg=#BBBBDB ctermfg=white ctermbg=green gui=NONE cterm=NONE
 autocmd ColorScheme * highlight SneakScope guifg=black guibg=white ctermfg=white ctermbg=green gui=NONE cterm=NONE
 
-    if (v:version >= 704 && len(getcompletion('proton', 'color')) == 1)
+    if (v:version >= 800 && len(getcompletion('proton', 'color')) == 1)
         colorscheme proton
     else
         colorscheme slate
         set nocursorline
     endif
 
-if (!has('nvim') && v:version < 704)
+if (!has('nvim') && v:version < 800)
 " #############################################################################
 "   STATUS LINE
 " #############################################################################
